@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     print(week_day)
     if int(plate[-1]) in restrictions.get(week_day, {}) \
-            and all(time_of_day >= lower_window or time_of_day <= upper_window for lower_window, upper_window in time_windows):
+            and all(time_of_day > lower_window or time_of_day <= upper_window for lower_window, upper_window in time_windows):
         print("Do not circulate")
     else:
         print("allowed")

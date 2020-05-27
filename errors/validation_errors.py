@@ -1,3 +1,3 @@
 
-class PlateValidationError(ValueError):
+class InputValidationError(ValueError):
     pass
