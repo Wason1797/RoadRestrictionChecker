@@ -1,5 +1,5 @@
+from datetime import datetime
 from argparse import ArgumentParser
-from datetime import datetime, date
 from errors.validation_errors import InputValidationError
 
 import time
@@ -14,7 +14,7 @@ def to_time(time_input: str, _format: str = r'%H:%M') -> time.struct_time:
 
 def to_date(date_input: str, _format: str = None) -> datetime:
     try:
-        return datetime.strptime(date_input, _format) if _format else date.fromisoformat(date_input)
+        return datetime.strptime(date_input, _format) if _format else datetime.fromisoformat(date_input)
     except ValueError:
         raise InputValidationError(f"{date_input} is not a valid date with format: {_format or 'ISO format'}")
 
