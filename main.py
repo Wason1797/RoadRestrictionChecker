@@ -11,6 +11,6 @@ if __name__ == "__main__":
     plate = Plate(args.plate)
 
     if RoadRestrictionChecker(GeneralRuleset).is_car_restricted(plate, week_day, time):
-        print(f"You have road restriction at the moment")
+        print("You have road restriction at the moment")
     else:
         print("You don't have road restriction at the moment")

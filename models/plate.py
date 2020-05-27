@@ -45,6 +45,6 @@ class Plate:
 
     @property
     def plate_type(self) -> str:
-        gov_type = self.special_gov_cases.get(self.value)
-        international_type = self.special_international_cases.get(self.letter_code)
+        gov_type = self.special_gov_cases.get(self.value[1].upper())
+        international_type = self.special_international_cases.get(self.letter_code.upper())
         return gov_type if gov_type else international_type if international_type else VehicleTypes.PRIVATE_VEHICLE

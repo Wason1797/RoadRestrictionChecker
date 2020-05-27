@@ -21,7 +21,7 @@ def to_date(date_input: str, _format: str = None) -> datetime:
 
 def configure_argument_parser() -> ArgumentParser:
     parser = ArgumentParser(description="Road Restriction Checker, be aware when you are allowed to be on the road ...")
-    parser.add_argument('-plate', help="Enter a car plate", type=str, required=True)
+    parser.add_argument('-plate', help="Enter a valid car plate i.e. (XXX-### XX-###X)", type=str, required=True)
     parser.add_argument('-date', help="Enter a date following this format yyyy-mm-dd", type=str, required=True)
     parser.add_argument('-time', help="Enter a 24 hour time following this format hh:mm", type=str, required=True)
     return parser
