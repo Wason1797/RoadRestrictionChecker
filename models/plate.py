@@ -1,4 +1,5 @@
 from utils.constants import VehicleTypes
+from errors.validation_errors import PlateValidationError
 
 import re
 
@@ -26,14 +27,13 @@ class Plate:
     }
 
     def __init__(self, value: str):
-        self.value = value
+        if re.match(self.valid_regex, self.value):
+            self.value = value
+        else:
+            raise PlateValidationError(f"Plate {value} does not match the allowed standard")
 
     def __repr__(self):
         return self.value
-
-    @property
-    def is_valid(self) -> bool:
-        return bool(re.match(self.valid_regex, self.value))
 
     @property
     def last_digit(self) -> int:
