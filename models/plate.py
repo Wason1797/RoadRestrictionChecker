@@ -6,7 +6,7 @@ import re
 
 class Plate:
 
-    valid_regex: str = r"(^[a-zA-Z]{2,3}-?[0-9]{3,4}$|^[a-zA-Z]{2}-?[0-9]{3}[a-zA-Z]$)"
+    valid_regex: str = r"(^([a-zA-Z]{3}|[cCoOdDiIaAtT]{2})-?[0-9]{3,4}$|^[a-zA-Z]{2}-?[0-9]{3}[a-zA-Z]$)"
     letter_code_regex: str = r"^[a-zA-Z]{2,3}"
 
     special_gov_cases: dict = {
@@ -27,7 +27,7 @@ class Plate:
     }
 
     def __init__(self, value: str):
-        if re.match(self.valid_regex, self.value):
+        if re.match(self.valid_regex, value):
             self.value = value
         else:
             raise PlateValidationError(f"Plate {value} does not match the allowed standard")
@@ -41,7 +41,7 @@ class Plate:
 
     @property
     def letter_code(self) -> str:
-        return re.match(self.letter_code_regex, self.value)
+        return re.search(self.letter_code_regex, self.value).group(0)
 
     @property
     def plate_type(self) -> str:
