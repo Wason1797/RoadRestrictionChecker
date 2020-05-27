@@ -1,6 +1,5 @@
 from datetime import date
 import time
-# from utils.validator import Validator
 
 
 if __name__ == "__main__":

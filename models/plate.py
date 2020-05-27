@@ -1,16 +1,28 @@
+from utils.constants import VehicleTypes
+
 import re
 
 
 class Plate:
 
     valid_regex: str = r"(^[a-zA-Z]{2,3}-?[0-9]{3,4}$|^[a-zA-Z]{2}-?[0-9]{3}[a-zA-Z]$)"
-    special_cases: dict = {
-        'E': 'Goverment Vehicle',
-        'X': 'Official Vehicle',
-        'M': 'GAD Vehicle',
-        'A': 'Comercial Vehicle',
-        'U': 'Comercial Vehicle',
-        'Z': 'Comercial Vehicle',
+    letter_code_regex: str = r"^[a-zA-Z]{2,3}"
+
+    special_gov_cases: dict = {
+        'E': VehicleTypes.GOV_VEHICLE,
+        'X': VehicleTypes.OFFICIAL_VEHICLE,
+        'M': VehicleTypes.GAD_VEHICLE,
+        'A': VehicleTypes.COMERCIAL_VEHICLE,
+        'U': VehicleTypes.COMERCIAL_VEHICLE,
+        'Z': VehicleTypes.COMERCIAL_VEHICLE,
+    }
+
+    special_international_cases: dict = {
+        'CC': VehicleTypes.CC_VEHICLE,
+        'CD': VehicleTypes.CD_VEHICLE,
+        'OI': VehicleTypes.OI_VEHICLE,
+        'AT': VehicleTypes.AT_VEHICLE,
+        'IT': VehicleTypes.IT_VEHICLE,
     }
 
     def __init__(self, value: str):
@@ -22,3 +34,17 @@ class Plate:
     @property
     def is_valid(self) -> bool:
         return bool(re.match(self.valid_regex, self.value))
+
+    @property
+    def last_digit(self) -> int:
+        return int(self.value[-1] if str.isdigit(self.value[-1]) else self.value[-2])
+
+    @property
+    def letter_code(self) -> str:
+        return re.match(self.letter_code_regex, self.value)
+
+    @property
+    def plate_type(self) -> str:
+        gov_type = self.special_gov_cases.get(self.value)
+        international_type = self.special_international_cases.get(self.letter_code)
+        return gov_type if gov_type else international_type if international_type else VehicleTypes.PRIVATE_VEHICLE
