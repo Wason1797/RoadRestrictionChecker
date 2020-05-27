@@ -1,0 +1,3 @@
+
+class PlateValidationError(ValueError):
+    pass
