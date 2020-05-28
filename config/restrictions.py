@@ -14,7 +14,6 @@ class RuleSet:
         7: set(),
     }
 
-    ALLOW_SPECIAL_CASES = True
     APPLY_TO = {VehicleTypes.COMERCIAL_VEHICLE, VehicleTypes.PRIVATE_VEHICLE}
     TIME_WINDOWS = None
 

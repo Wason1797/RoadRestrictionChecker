@@ -14,11 +14,11 @@ class RoadRestrictionChecker:
         return any(time > lower_bound and time < upper_bound for lower_bound, upper_bound in self.rule_set.TIME_WINDOWS)
 
     def is_special_case(self, plate: Plate):
-        return self.rule_set.ALLOW_SPECIAL_CASES and plate.plate_type not in self.rule_set.APPLY_TO
+        return plate.plate_type not in self.rule_set.APPLY_TO
 
     def is_car_restricted(self, plate: Plate, week_day: int, time) -> bool:
         print(f"{plate} belongs to a {plate.plate_type}")
-        print(f"Current config {'allows' if self.rule_set.ALLOW_SPECIAL_CASES else 'dont allow'} special cases")
+        print(f"Current config applies to {', '.join(self.rule_set.APPLY_TO)}")
 
         return False if self.is_special_case(plate) else True \
             if self.is_plate_restricted(plate, week_day) and self.is_time_restricted(time) else False
